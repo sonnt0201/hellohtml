@@ -1,4 +1,4 @@
- 
+
 /*
     10/2023 by SƠN
     Main Server code goes here
@@ -73,13 +73,17 @@ int main()
         // variable def
         char request[8000] = "";
         int bytesRead;
-        char* user = NULL;
+        char *user = NULL;
 
         // RECEIVE REQUEST
         while (
             (bytesRead = recv(clientSocket, request, sizeof(request), 0)) > 0)
         {
-            printf("message received: \n %s \n", request);
+
+            user = param_val_GET(request, "name");
+            printf("USERNAME: %s \n", user);
+
+            // printf("message received: \n %s \n", request);
             int type = request_type(request);
 
             // init link to html page
@@ -92,7 +96,11 @@ int main()
                 link = "../web_pages/index.html";
                 break;
             case HTTP_POST:
-
+                break;
+            case HTTP_PUT:
+                break;
+            case HTTP_DELETE:
+                break;
             default:
                 break;
             }
@@ -106,13 +114,13 @@ int main()
 
             // create response
             char *response = create_response(html_file);
-            
-            //SEND
+
+            // SEND
             send(clientSocket, response, strlen(response), 0);
 
             // close client socket func goes in inner while, so server can get multi-request
             closesocket(clientSocket);
-        }        
+        }
     }
 
     closesocket(serverSocket);

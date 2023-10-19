@@ -22,4 +22,5 @@ char *print_request(char *message, int len); // Variable declaration
 */
 int request_type(char *request);
 char *create_response(FILE *p_file);
+char* param_val_GET(char* request, char* params);
 #endif
