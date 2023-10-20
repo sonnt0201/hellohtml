@@ -11,8 +11,8 @@ Sử dụng git:
   git clone https://github.com/sonnt0201/hellohtml
 ```
 ## Sử dụng
-Mở folder ```product``` và chạy ```server.exe```
-
+1. Mở folder ```product``` và chạy ```server.exe```
+1. Mở browser và truy cập ```localhost:8080``` để sử dụng web app
 ## Mô tả sơ bộ project:
 ### ```./src```
 Chứa ```server.c``` là file main của server, winsock server code đặt ở đây
