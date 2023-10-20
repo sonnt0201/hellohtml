@@ -3,7 +3,8 @@
 Server đơn giản trả về HTML file sử dụng winsock2
 Ngôn ngữ: C
 ## Cài đặt 
-Sử dụng git: ```
+Sử dụng git: 
+```
   git clone https://github.com/sonnt0201/hellohtml
 ```
 ## Sử dụng
