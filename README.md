@@ -12,8 +12,8 @@ Sử dụng git:
 Mở folder ```product``` và chạy ```server.exe```
 
 ## Mô tả sơ bộ project:
-### ```./src/server.c```
-Chứa file main của server, winsock server code đặt ở đây
+### ```./src```
+Chứa ```server.c``` là file main của server, winsock server code đặt ở đây
 ### ```./libs```
 Là thư viện viết tay đơn giản cung cấp các hàm xử lý HTTP Request và Response
 
