@@ -3,6 +3,8 @@
 Server đơn giản trả về HTML file sử dụng winsock2
 
 Ngôn ngữ: C
+
+[Link Demo Video](https://youtu.be/Hm2Xkz_Qnpo)
 ## Cài đặt 
 Sử dụng git: 
 ```
