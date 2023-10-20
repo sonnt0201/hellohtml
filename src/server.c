@@ -80,44 +80,21 @@ int main()
             (bytesRead = recv(clientSocket, request, sizeof(request), 0)) > 0)
         {
 
-            user = param_val_GET(request, "name");
-            printf("USERNAME: %s \n", user);
-
-            // printf("message received: \n %s \n", request);
-            int type = request_type(request);
-
+            user = param_val_GET(request, "s_name");
+            printf(" CURRENT_USERNAME: %s \n", user);
             // init link to html page
             char *link = "../web_pages/index.html";
-
-            // MAPPER
-            switch (type)
-            {
-            case HTTP_GET:
-                link = "../web_pages/index.html";
-                break;
-            case HTTP_POST:
-                break;
-            case HTTP_PUT:
-                break;
-            case HTTP_DELETE:
-                break;
-            default:
-                break;
+            char *response;
+            if (user == NULL)
+            { // create response
+                response = create_response(link);
             }
-
-            FILE *html_file = fopen(link, "r");
-            if (html_file == NULL)
+            else
             {
-                perror("Error opening HTML file. \n");
-                return 1;
+                link = "../web_pages/hello.html";
+                response = create_response(link);
             }
-
-            // create response
-            char *response = create_response(html_file);
-
-            // SEND
             send(clientSocket, response, strlen(response), 0);
-
             // close client socket func goes in inner while, so server can get multi-request
             closesocket(clientSocket);
         }

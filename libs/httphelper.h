@@ -1,4 +1,8 @@
-// file1.h
+/*
+    10/2023 by SƠN
+    'httphelper' functions' declare
+
+*/
 
 #ifndef HTTP_HELPER_H
 #define HTTP_HELPER_H
@@ -21,6 +25,6 @@ char *print_request(char *message, int len); // Variable declaration
     HTTP_DELETE 3
 */
 int request_type(char *request);
-char *create_response(FILE *p_file);
+char *create_response(char* link);
 char* param_val_GET(char* request, char* params);
 #endif
