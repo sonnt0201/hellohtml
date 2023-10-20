@@ -15,9 +15,13 @@
         console.log(queryString);
         const urlParams = new URLSearchParams(queryString);
         let s_name = urlParams.get('s_name');
-        // if (s_name)
-            document.querySelector("#header").textContent = "Hello: " + urlParams.get('s_name'); 
-           
+        if (s_name)
+            document
+            .querySelector("#header")
+            .textContent = "Hello: " + urlParams.get('s_name'); else {
+                window.location.href = '/'
+            }
+
     </script>
 </body>
 

@@ -79,20 +79,20 @@ char *param_val_GET(char *request, char *param)
     char *val_start = strstr(request, param);
     if (val_start == NULL )
     {
-        printf("Param %s not found in request", param);
+        printf("Param %s not found in request. \n", param);
         return NULL;
     }
 
     // move to '=' char
     val_start += strlen(param) + 1;
-    printf("val_start: %c \n", *val_start);
+    // printf("val_start: %c \n", *val_start);
     // init param_end
     char *val_end = val_start;
 
     // loop forward until meet '&' or ' '
     while (*val_end != '&' && *val_end != ' ' && *val_end != '\n')
     {
-        printf("%c", *val_end);
+        // printf("%c", *val_end);
         val_end++;
     }
     printf("\n");
@@ -102,7 +102,7 @@ char *param_val_GET(char *request, char *param)
     char *val = (char *)malloc(val_len + 1);
     if (val == NULL)
     {
-        printf("Memory allocation failed !");
+        printf("Memory allocation failed ! \n");
         return NULL;
     }
 

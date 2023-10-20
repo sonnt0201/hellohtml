@@ -4,6 +4,9 @@
     Main Server code goes here
     To compile and run server, open terminal in this 'src' folder then run:
     gcc ../libs/httphelper.c server.c -o server -lws2_32; ./server.exe
+
+    To build product, open terminal in this 'src' folder then run
+    gcc ../libs/httphelper.c server.c -o server -lws2_32; ./server.exe
 */
 
 #include <stdio.h>
