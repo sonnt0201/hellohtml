@@ -2,6 +2,7 @@
 ## Tổng quan
 Server đơn giản trả về HTML file sử dụng winsock2
 
+CÓ THỬ SỬ DỤNG ĐA LUỒNG
 Ngôn ngữ: C
 
 [Link Demo Video](https://youtu.be/Hm2Xkz_Qnpo)
