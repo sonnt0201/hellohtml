@@ -11,9 +11,55 @@
 
 #include <stdio.h>
 #include <winsock2.h>
+#include<process.h>
 #include "../libs/httphelper.h"
+
 #pragma comment(lib, "Ws2_32.lib");
 // cd src
+
+void handle_client(SOCKET clientSocket)
+{
+
+    if (clientSocket == INVALID_SOCKET)
+    {
+        printf("failed to accept client connection. \n");
+        ExitThread(1);
+        return;
+        WSACleanup();
+        return ;
+    }
+
+    // variable def
+    char request[8000] = "";
+    int bytesRead;
+    char *user = NULL;
+
+    // RECEIVE REQUEST
+    while (
+        (bytesRead = recv(clientSocket, request, sizeof(request), 0)) > 0)
+    {
+
+        user = param_val_GET(request, "s_name");
+        printf(" CURRENT_USERNAME: %s \n", user);
+        // init link to html page
+        char *link = "../web_pages/index.html";
+        char *response;
+        if (user == NULL)
+        { // create response
+            response = create_response(link);
+        }
+        else
+        {
+            link = "../web_pages/hello.html";
+            response = create_response(link);
+        }
+        send(clientSocket, response, strlen(response), 0);
+        // close client socket func goes in inner while, so server can get multi-request
+        closesocket(clientSocket);
+        // kill thread
+        ExitThread(0);
+    }
+}
 
 int main()
 {
@@ -65,42 +111,9 @@ int main()
 
         // init client
         SOCKET clientSocket = accept(serverSocket, NULL, NULL);
-        if (clientSocket == INVALID_SOCKET)
-        {
-            printf("failed to accept client connection. \n");
-            closesocket(serverSocket);
-            WSACleanup();
-            return 1;
-        }
 
-        // variable def
-        char request[8000] = "";
-        int bytesRead;
-        char *user = NULL;
+        CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)handle_client,(LPVOID) clientSocket, 0, NULL);
 
-        // RECEIVE REQUEST
-        while (
-            (bytesRead = recv(clientSocket, request, sizeof(request), 0)) > 0)
-        {
-
-            user = param_val_GET(request, "s_name");
-            printf(" CURRENT_USERNAME: %s \n", user);
-            // init link to html page
-            char *link = "../web_pages/index.html";
-            char *response;
-            if (user == NULL)
-            { // create response
-                response = create_response(link);
-            }
-            else
-            {
-                link = "../web_pages/hello.html";
-                response = create_response(link);
-            }
-            send(clientSocket, response, strlen(response), 0);
-            // close client socket func goes in inner while, so server can get multi-request
-            closesocket(clientSocket);
-        }
     }
 
     closesocket(serverSocket);
